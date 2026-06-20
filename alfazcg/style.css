@@ -182,15 +182,6 @@ h1 span {
   color: #fff;
 }
 .cta svg { width: 14px; height: 14px; }
-
-.footer {
-  position: fixed;
-  bottom: 1.5rem;
-  font-size: 10px;
-  color: var(--text-muted);
-  letter-spacing: 0.1em;
-  opacity: 0.5;
-  z-index: 1;
 }
 
 @media (max-width: 480px) {
