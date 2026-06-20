@@ -1,0 +1,199 @@
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --purple: #a855f7;
+  --purple-glow: rgba(168, 85, 247, 0.35);
+  --cyan: #22d3ee;
+  --cyan-glow: rgba(34, 211, 238, 0.25);
+  --bg: #08080f;
+  --text: #e8e8f0;
+  --text-muted: #6b6b88;
+  --mono: 'JetBrains Mono', monospace;
+}
+
+html, body { height: 100%; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--mono);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 2rem;
+  overflow: hidden;
+  position: relative;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(168,85,247,0.04) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(168,85,247,0.04) 1px, transparent 1px);
+  background-size: 48px 48px;
+  pointer-events: none;
+  z-index: 0;
+}
+
+body::after {
+  content: '';
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 600px;
+  height: 600px;
+  background: radial-gradient(ellipse, rgba(168,85,247,0.12) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.container {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2rem;
+}
+
+.logo-wrapper {
+  position: relative;
+  width: 380px;
+  height: 380px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.logo-wrapper::before {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid transparent;
+  border-top-color: var(--purple);
+  border-right-color: var(--cyan);
+  animation: spin-ring 3s linear infinite;
+}
+
+.logo-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 4px;
+  border-radius: 50%;
+  border: 1px solid transparent;
+  border-bottom-color: var(--purple);
+  border-left-color: var(--cyan);
+  animation: spin-ring 2s linear infinite reverse;
+  opacity: 0.6;
+}
+
+.logo-img {
+  width: 560px;
+  height: 560px;
+  object-fit: contain;
+  border-radius: 10%;
+  animation: spin-logo 8s linear infinite;
+  filter: drop-shadow(0 0 20px var(--purple-glow)) drop-shadow(0 0 40px var(--cyan-glow));
+}
+
+@keyframes spin-ring {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+.badge {
+  font-size: 11px;
+  letter-spacing: 0.2em;
+  color: var(--purple);
+  border: 1px solid rgba(168,85,247,0.3);
+  padding: 0.3rem 1rem;
+  border-radius: 999px;
+  background: rgba(168,85,247,0.08);
+}
+
+h1 {
+  font-size: clamp(1.6rem, 5vw, 2.8rem);
+  font-weight: 700;
+  line-height: 1.2;
+  color: #fff;
+  text-shadow: 0 0 40px var(--purple-glow);
+}
+h1 span {
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.subtitle {
+  font-size: 13px;
+  color: var(--text-muted);
+  max-width: 400px;
+  line-height: 1.8;
+  letter-spacing: 0.02em;
+}
+
+.progress-bar {
+  width: 280px;
+  height: 3px;
+  background: rgba(255,255,255,0.06);
+  border-radius: 999px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  border-radius: 999px;
+  background: linear-gradient(90deg, var(--purple), var(--cyan));
+  animation: progress-pulse 2.5s ease-in-out infinite;
+  box-shadow: 0 0 10px var(--purple-glow);
+}
+@keyframes progress-pulse {
+  0%   { width: 15%; }
+  50%  { width: 80%; }
+  100% { width: 15%; }
+}
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.75rem 1.75rem;
+  border-radius: 6px;
+  border: 1px solid rgba(168,85,247,0.5);
+  
+  color: var(--purple);
+  font-family: var(--mono);
+  font-size: 13px;
+  letter-spacing: 0.05em;
+  text-decoration: none;
+  transition: background 0.2s, border-color 0.2s, color 0.2s;
+  margin-bottom: 3rem;
+}
+.cta:hover {
+  background: rgba(168,85,247,0.2);
+  border-color: var(--purple);
+  color: #fff;
+}
+.cta svg { width: 14px; height: 14px; }
+
+.footer {
+  position: fixed;
+  bottom: 1.5rem;
+  font-size: 10px;
+  color: var(--text-muted);
+  letter-spacing: 0.1em;
+  opacity: 0.5;
+  z-index: 1;
+}
+
+@media (max-width: 480px) {
+  .logo-img { width: 130px; height: 130px; }
+  .logo-wrapper { width: 140px; height: 140px; }
+}
